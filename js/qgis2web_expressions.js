@@ -754,3 +754,69 @@ function fnc__specialcol_(values, context) {
 function fnc_project_color(values, context) {
     return false;
 };
+
+
+
+function exp_NappesStress_2rule0_eval_expression(context) {
+    // stress >= 0 AND stress <= 1e-06
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return ((feature.properties['stress']  >= 0.0) && (feature.properties['stress']  <= 1e-06));
+    } else {
+        return ((feature['stress']  >= 0.0) && (feature['stress']  <= 1e-06));
+    }
+}
+
+
+function exp_NappesStress_2rule1_eval_expression(context) {
+    // stress > 1e-06 AND stress <= 20
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return ((feature.properties['stress']  > 1e-06) && (feature.properties['stress']  <= 20));
+    } else {
+        return ((feature['stress']  > 1e-06) && (feature['stress']  <= 20));
+    }
+}
+
+
+function exp_NappesStress_2rule2_eval_expression(context) {
+    // stress > 20 AND stress <= 50
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return ((feature.properties['stress']  > 20) && (feature.properties['stress']  <= 50));
+    } else {
+        return ((feature['stress']  > 20) && (feature['stress']  <= 50));
+    }
+}
+
+
+function exp_NappesStress_2rule3_eval_expression(context) {
+    // stress > 50 AND stress <= 100
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return ((feature.properties['stress']  > 50) && (feature.properties['stress']  <= 100));
+    } else {
+        return ((feature['stress']  > 50) && (feature['stress']  <= 100));
+    }
+}
+
+
+function exp_NappesStress_2rule4_eval_expression(context) {
+    // stress > 100 AND stress <= 1.21696e+09
+
+    var feature = context.feature;
+    
+    if (feature.properties) {
+        return ((feature.properties['stress']  > 100) && (feature.properties['stress']  <= 1216957480.0));
+    } else {
+        return ((feature['stress']  > 100) && (feature['stress']  <= 1216957480.0));
+    }
+}

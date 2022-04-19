@@ -30,11 +30,12 @@
         <script src="js/rbush.min.js"></script>
         <script src="js/labelgun.min.js"></script>
         <script src="js/labels.js"></script>
-        <script src="data/GlobalGroundwaterStress_1.js"></script>
+        <script src="data/WorldBorders_1.js"></script>
+        <script src="data/NappesStress_2.js"></script>
         <script>
         var map = L.map('map', {
             zoomControl:true, maxZoom:7, minZoom:3
-        }).fitBounds([[-55.088616883242054,-142.5064610451665],[75.16878032023547,158.9228496132764]]);
+        }).fitBounds([[-56.89170856438018,-136.10179800745328],[74.32060326259328,165.3275126516588]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -54,32 +55,93 @@
         });
         layer_EsriTopographic_0;
         map.addLayer(layer_EsriTopographic_0);
-        function pop_GlobalGroundwaterStress_1(feature, layer) {
+        function pop_WorldBorders_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">NAME</th>\
+                        <td>' + (feature.properties['NAME'] !== null ? autolinker.link(feature.properties['NAME'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Nappes Stress_stress'] !== null ? autolinker.link(feature.properties['Nappes Stress_stress'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_WorldBorders_1_0() {
+            return {
+                pane: 'pane_WorldBorders_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(43,131,186,0.0)',
+                interactive: false,
+            }
+        }
+        map.createPane('pane_WorldBorders_1');
+        map.getPane('pane_WorldBorders_1').style.zIndex = 401;
+        map.getPane('pane_WorldBorders_1').style['mix-blend-mode'] = 'normal';
+        var layer_WorldBorders_1 = new L.geoJson(json_WorldBorders_1, {
+            attribution: '',
+            interactive: false,
+            dataVar: 'json_WorldBorders_1',
+            layerName: 'layer_WorldBorders_1',
+            pane: 'pane_WorldBorders_1',
+            onEachFeature: pop_WorldBorders_1,
+            style: style_WorldBorders_1_0,
+        });
+        bounds_group.addLayer(layer_WorldBorders_1);
+        map.addLayer(layer_WorldBorders_1);
+        function pop_NappesStress_2(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">aq_name</th>\
                         <td>' + (feature.properties['aq_name'] !== null ? autolinker.link(feature.properties['aq_name'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">countries</th>\
-                        <td>' + (feature.properties['countries'] !== null ? autolinker.link(feature.properties['countries'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">aq_countries</th>\
+                        <td>' + (feature.properties['aq_countries'] !== null ? autolinker.link(feature.properties['aq_countries'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">stress</th>\
                         <td>' + (feature.properties['stress'] !== null ? autolinker.link(feature.properties['stress'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">code_2015</th>\
-                        <td>' + (feature.properties['code_2015'] !== null ? autolinker.link(feature.properties['code_2015'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Country</th>\
+                        <td>' + (feature.properties['Country'] !== null ? autolinker.link(feature.properties['Country'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
-
-        function style_GlobalGroundwaterStress_1_0(feature) {
-            if (feature.properties['stress'] >= 0.000000 && feature.properties['stress'] <= 20.000000 ) {
-                return {
-                pane: 'pane_GlobalGroundwaterStress_1',
+        function style_NappesStress_2_0(feature) {
+            var context = {
+                feature: feature,
+                variables: {}
+            };
+            // Start of if blocks and style check logic
+            if (exp_NappesStress_2rule0_eval_expression(context)) {
+                  return {
+                pane: 'pane_NappesStress_2',
+                opacity: 1,
+                color: 'rgba(247,247,247,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(150,150,150,1.0)',
+                interactive: true,
+            };
+                }
+                else if (exp_NappesStress_2rule1_eval_expression(context)) {
+                  return {
+                pane: 'pane_NappesStress_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -88,13 +150,13 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(26,150,65,1.0)',
+                fillColor: 'rgba(40,187,40,1.0)',
                 interactive: true,
-            }
-            }
-            if (feature.properties['stress'] >= 20.000000 && feature.properties['stress'] <= 50.000000 ) {
-                return {
-                pane: 'pane_GlobalGroundwaterStress_1',
+            };
+                }
+                else if (exp_NappesStress_2rule2_eval_expression(context)) {
+                  return {
+                pane: 'pane_NappesStress_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -103,13 +165,13 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(251,233,71,1.0)',
+                fillColor: 'rgba(247,249,109,1.0)',
                 interactive: true,
-            }
-            }
-            if (feature.properties['stress'] >= 50.000000 && feature.properties['stress'] <= 100.000000 ) {
-                return {
-                pane: 'pane_GlobalGroundwaterStress_1',
+            };
+                }
+                else if (exp_NappesStress_2rule3_eval_expression(context)) {
+                  return {
+                pane: 'pane_NappesStress_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -118,13 +180,13 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(241,153,39,1.0)',
+                fillColor: 'rgba(244,159,48,1.0)',
                 interactive: true,
-            }
-            }
-            if (feature.properties['stress'] >= 100.000000 && feature.properties['stress'] <= 1216957480.000000 ) {
-                return {
-                pane: 'pane_GlobalGroundwaterStress_1',
+            };
+                }
+                else if (exp_NappesStress_2rule4_eval_expression(context)) {
+                  return {
+                pane: 'pane_NappesStress_2',
                 opacity: 1,
                 color: 'rgba(35,35,35,1.0)',
                 dashArray: '',
@@ -133,27 +195,30 @@
                 weight: 1.0, 
                 fill: true,
                 fillOpacity: 1,
-                fillColor: 'rgba(215,25,28,1.0)',
+                fillColor: 'rgba(255,0,0,1.0)',
                 interactive: true,
-            }
+            };
+                }
+            else {
+                return {fill: false, stroke: false};
             }
         }
-        map.createPane('pane_GlobalGroundwaterStress_1');
-        map.getPane('pane_GlobalGroundwaterStress_1').style.zIndex = 401;
-        map.getPane('pane_GlobalGroundwaterStress_1').style['mix-blend-mode'] = 'normal';
-        var layer_GlobalGroundwaterStress_1 = new L.geoJson(json_GlobalGroundwaterStress_1, {
+        map.createPane('pane_NappesStress_2');
+        map.getPane('pane_NappesStress_2').style.zIndex = 402;
+        map.getPane('pane_NappesStress_2').style['mix-blend-mode'] = 'normal';
+        var layer_NappesStress_2 = new L.geoJson(json_NappesStress_2, {
             attribution: '',
             interactive: true,
-            dataVar: 'json_GlobalGroundwaterStress_1',
-            layerName: 'layer_GlobalGroundwaterStress_1',
-            pane: 'pane_GlobalGroundwaterStress_1',
-            onEachFeature: pop_GlobalGroundwaterStress_1,
-            style: style_GlobalGroundwaterStress_1_0,
+            dataVar: 'json_NappesStress_2',
+            layerName: 'layer_NappesStress_2',
+            pane: 'pane_NappesStress_2',
+            onEachFeature: pop_NappesStress_2,
+            style: style_NappesStress_2_0,
         });
-        bounds_group.addLayer(layer_GlobalGroundwaterStress_1);
-        map.addLayer(layer_GlobalGroundwaterStress_1);
+        bounds_group.addLayer(layer_NappesStress_2);
+        map.addLayer(layer_NappesStress_2);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Global Groundwater Stress<br /><table><tr><td style="text-align: center;"><img src="legend/GlobalGroundwaterStress_1_0200.png" /></td><td>0 - 20</td></tr><tr><td style="text-align: center;"><img src="legend/GlobalGroundwaterStress_1_20501.png" /></td><td>20 - 50</td></tr><tr><td style="text-align: center;"><img src="legend/GlobalGroundwaterStress_1_501002.png" /></td><td>50 - 100</td></tr><tr><td style="text-align: center;"><img src="legend/GlobalGroundwaterStress_1_10012169574803.png" /></td><td>100 - 1216957480</td></tr></table>': layer_GlobalGroundwaterStress_1,"Esri Topographic": layer_EsriTopographic_0,}).addTo(map);
+        L.control.layers(baseMaps,{'Nappes Stress<br /><table><tr><td style="text-align: center;"><img src="legend/NappesStress_2_NoData0.png" /></td><td>No Data</td></tr><tr><td style="text-align: center;"><img src="legend/NappesStress_2_Low1.png" /></td><td>Low</td></tr><tr><td style="text-align: center;"><img src="legend/NappesStress_2_Medium2.png" /></td><td>Medium</td></tr><tr><td style="text-align: center;"><img src="legend/NappesStress_2_High3.png" /></td><td>High</td></tr><tr><td style="text-align: center;"><img src="legend/NappesStress_2_VeryHigh4.png" /></td><td>Very High</td></tr></table>': layer_NappesStress_2,'<img src="legend/WorldBorders_1.png" /> World Borders': layer_WorldBorders_1,"Esri Topographic": layer_EsriTopographic_0,}).addTo(map);
         setBounds();
         </script>
     </body>
